@@ -21,8 +21,9 @@ const GameBoard = () => {
     const {roomId,userId} = useParams();
     const playerId = roomId+userId;
     console.log(roomId,userId,"consoled")
+    const arr = [0,0,0,0,0,0,0,0,0];
     const [check,setCheck] = useState(false);
-    const [board,setBoard] = useState([0,0,0,0,0,0,0,0,0]);
+    const [board,setBoard] = useState(arr);
 
 
     useEffect(() => {
@@ -45,9 +46,9 @@ const GameBoard = () => {
                 turnn = "X";
             }); 
             }else{
-            board[index] = value;
-            flushSync(() => {
-                setBoard(board);
+                flushSync(() => {
+                arr[index] = value;
+                setBoard(arr);
             });
             turnn = turn;
             console.log(board)
