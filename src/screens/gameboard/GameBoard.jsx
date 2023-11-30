@@ -100,7 +100,7 @@ const GameBoard = () => {
       
     }
     const handleClick = (index) => {
-        if(click){
+        if(check){
             return;
         }
         if(turnn == 'X' && userId == 1){
