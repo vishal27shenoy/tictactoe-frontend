@@ -46,9 +46,9 @@ const GameBoard = () => {
                 turnn = "X";
             }); 
             }else{
-                flushSync(() => {
-                arr[index] = value;
-                setBoard(arr);
+            board[index] = value;
+            flushSync(() => {
+                setBoard((prev) => {return [...board]});
             });
             turnn = turn;
             console.log(board)
