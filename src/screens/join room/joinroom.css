@@ -1,0 +1,31 @@
+.joinroomContainer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.inputHolder,
+.joiningBtn {
+    height: 4rem;
+    font-size: 1rem;
+    width: 20rem;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16.1px);
+    -webkit-backdrop-filter: blur(16.1px);
+    text-transform: capitalize;
+    border: 1px solid rgba(255, 255, 255, 0.43);
+}
+.inputHolder{
+    text-indent: 1rem;
+}
+.inputHolder::placeholder{
+    color: white;
+    text-indent: 1rem;
+}

@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "Roadrage";
+    src: url("../../asset/font/road-rage.ttf") format("truetype");
+}
+
+
+.gameboardContainer{
+    height: 100vh;
+    width: min(1000px,90%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   margin-inline: auto;
+   flex-direction: column;
+}
+.boardContainer{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.boardBox{
+    height: 8rem;
+    width: 8rem;
+    margin: 1rem;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16.1px);
+    -webkit-backdrop-filter: blur(16.1px);
+    border: 1px solid rgba(255, 255, 255, 0.43);
+    color: white;
+    font-size: 4rem;
+    font-family:"Roadrage" ;
+}
+
+#x{
+    color: #e60073;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+}
+#o {
+    color: #80deea;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #80deea, 0 0 40px #80deea, 0 0 50px #80deea, 0 0 60px #80deea, 0 0 70px #80deea;
+}
+.playAgainBtn{
+    height: 4rem;
+    width: 15rem;
+    align-self: center;
+    font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(16.1px);
+        -webkit-backdrop-filter: blur(16.1px);
+        border: 1px solid rgba(255, 255, 255, 0.43);
+        color: white;
+        font-family: "Roadrage";
+}
