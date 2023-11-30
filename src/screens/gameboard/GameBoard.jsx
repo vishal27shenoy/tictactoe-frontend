@@ -49,6 +49,7 @@ const GameBoard = () => {
             board[index] = value;
             flushSync(() => {
                 setBoard(board);
+                console.log(board)
             });
             turnn = turn;
             console.log(board)
