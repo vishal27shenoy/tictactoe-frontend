@@ -7,7 +7,7 @@ import { Route,Routes } from 'react-router-dom';
 function App() {
   return (
       <Routes>
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/" element={<Home/>} />
         <Route path="/joinroom" element={<JoinRoom/>}/>
         <Route path="/gameboard/:roomId/:userId" element={<GameBoard/>}/>
       </Routes>
