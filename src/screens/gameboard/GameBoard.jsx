@@ -41,7 +41,7 @@ const GameBoard = () => {
             if(message){
                 turnn=turn;
                flushSync(() => {
-                setBoard([0,0,0,0,0,0,0,0,0]);
+                setBoard(() => [0,0,0,0,0,0,0,0,0]);
                 setCheck(false);
                 turnn = "X";
             }); 
