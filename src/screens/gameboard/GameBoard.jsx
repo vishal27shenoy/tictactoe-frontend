@@ -45,6 +45,7 @@ const GameBoard = () => {
                 setCheck(false);
                 turnn = "X";
             }); 
+            console.log("came to message")
             }else{
             board[index] = value;
             flushSync(() => {
