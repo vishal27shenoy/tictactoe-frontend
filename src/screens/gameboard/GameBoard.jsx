@@ -41,6 +41,8 @@ const GameBoard = () => {
                 turnn=turn;
                flushSync(() => {
                 setBoard([0,0,0,0,0,0,0,0,0]);
+                setCheck(false);
+                turnn = "X";
             }); 
             }else{
             board[index] = value;
@@ -91,6 +93,7 @@ const GameBoard = () => {
             progress: undefined,
             theme: "dark",
         });
+        setCheck(true);
         }
       
     }
@@ -117,7 +120,7 @@ const GameBoard = () => {
             })
         }
         </div>
-        {(!board.includes(0) || check )&& <button className='playAgainBtn' onClick={() => handelReset()}>Play Again</button>}
+        {check  && <button className='playAgainBtn' onClick={() => handelReset()}>Play Again</button>}
     </div>
   )
 }
