@@ -100,6 +100,9 @@ const GameBoard = () => {
       
     }
     const handleClick = (index) => {
+        if(click){
+            return;
+        }
         if(turnn == 'X' && userId == 1){
             socket.emit("ongame",{roomId:roomId,userId:playerId,turn:'O',value:'X',index:index});
         }else if(turnn == 'O' && userId == 2){
@@ -118,7 +121,7 @@ const GameBoard = () => {
         {
             board && board.map((item,index) =>{
                 console.log(item)
-                return <div className='boardBox' id={`${item == 'X' ? 'x' : 'o'}`} key={index} onClick={() => (item === 0 && !check) && handleClick(index)}>{item != 0 && item}</div>
+                return <div className='boardBox' id={`${item == 'X' ? 'x' : 'o'}`} key={index} onClick={() => item === 0 && handleClick(index)}>{item != 0 && item}</div>
             })
         }
         </div>
