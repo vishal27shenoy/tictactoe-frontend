@@ -16,14 +16,13 @@ const win = [[0,1,2],
 [2,4,6],
 ]
 let turnn = "X";
+let arr = [0,0,0,0,0,0,0,0,0];
 const GameBoard = () => {
     const socket = io("https://tictactoe-stz8.onrender.com");
     const {roomId,userId} = useParams();
     const playerId = roomId+userId;
-    console.log(roomId,userId,"consoled")
-    const arr = [0,0,0,0,0,0,0,0,0];
+    const [change,setChange] = useState(false);
     const [check,setCheck] = useState(false);
-    const [board,setBoard] = useState(arr);
 
 
     useEffect(() => {
@@ -36,25 +35,18 @@ const GameBoard = () => {
 
     useEffect(() => {
         socket.on(roomId,(object) => {
-            console.log(object)
             const { userId, index, value, turn,message } = object;
             if(message){
-                turnn=turn;
-               flushSync(() => {
-                setBoard(arr);
+                turnn="X";
+                arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
                 setCheck(false);
-            }); 
-            console.log("came to message")
+                setChange((prev) => !prev);
             }else{
-            board[index] = value;
-            flushSync(() => {
-                setBoard(() => board);
-                console.log(board)
-            });
-            turnn = turn;
-            console.log(board)
-            checkWin();
-        }
+                arr[index] = value;
+                setChange((prev) => !prev);
+                turnn = turn;
+                checkWin();
+            }
         });
     },[]);
 
@@ -64,51 +56,48 @@ const GameBoard = () => {
     const checkWin = () => {
         for (const element of win) {
         let [a, b, c] = element;
-        if (
-          board[a] &&
-          board[a] === board[b] &&
-          board[b] === board[c]
-        ) {
-           toast(`${board[a]} Won a Game`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-        setCheck(true);
+        if (arr[a || b || c] != 0 && arr[a] === arr[b] && arr[b] === arr[c]) {
+            toast(`${arr[a]} Won a Game`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            setCheck(true);
           return;
         }
     }
-        console.log(board)
-        if(!board.includes(0)){
-           toast("Game Draw", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-        setCheck(true);
+        if (!arr.includes(0)) {
+               toast("Game Draw", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            setCheck(true);
         }
-      
+
+        
     }
     const handleClick = (index) => {
         if(check){
             return;
-        }
-        if(turnn == 'X' && userId == 1){
+        }else if(turnn == 'X' && userId == 1){
             socket.emit("ongame",{roomId:roomId,userId:playerId,turn:'O',value:'X',index:index});
         }else if(turnn == 'O' && userId == 2){
                 socket.emit("ongame",{roomId:roomId,userId:playerId,turn:'X',value:'O',index:index});     
         }
     }
+
+    // useEffect(() => {},[change,arr])
 
     const handelReset = () => {
         socket.emit("playagain",{roomId:roomId,turm:'X'});
@@ -119,9 +108,9 @@ const GameBoard = () => {
         <ToastContainer style={{ textAlign: 'left', padding: '0', fontSize: '14px' ,color:'black'}}/>
         <div className="boardContainer">
         {
-            board && board.map((item,index) =>{
+            arr.map((item,index) =>{
                 console.log(item)
-                return <div className='boardBox' id={`${item == 'X' ? 'x' : 'o'}`} key={index} onClick={() => item === 0 && handleClick(index)}>{item != 0 && item}</div>
+                return (<div className='boardBox' id={`${item == 'X' ? 'x' : 'o'}`} key={index} onClick={() => item === 0 && handleClick(index)}>{item != 0 && item}</div>)
             })
         }
         </div>
@@ -131,3 +120,29 @@ const GameBoard = () => {
 }
 
 export default GameBoard
+
+
+// toast(`${board[a]} Won a Game`, {
+//     position: "top-right",
+//     autoClose: 5000,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//     theme: "dark",
+// });
+
+// if (!board.includes(0)) {
+//     //    toast("Game Draw", {
+//     //     position: "top-right",
+//     //     autoClose: 5000,
+//     //     hideProgressBar: false,
+//     //     closeOnClick: true,
+//     //     pauseOnHover: true,
+//     //     draggable: true,
+//     //     progress: undefined,
+//     //     theme: "dark",
+//     // });
+//     setCheck(true);
+// }
