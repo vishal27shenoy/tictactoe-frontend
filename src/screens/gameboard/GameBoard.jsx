@@ -48,7 +48,7 @@ const GameBoard = () => {
             }else{
             board[index] = value;
             flushSync(() => {
-                setBoard(board);
+                setBoard(() => board);
                 console.log(board)
             });
             turnn = turn;
