@@ -6,18 +6,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { flushSync } from 'react-dom';
 // const socket = io("http://localhost:5000");
-const socket = io("https://tictactoe-stz8.onrender.com");
 const win = [[0,1,2],
-            [3,4,5],
-            [6,7,8],
-            [0,3,6],
-            [1,4,7],
-            [2,5,8],
-            [0,4,8],
-            [2,4,6],
-    ]
+[3,4,5],
+[6,7,8],
+[0,3,6],
+[1,4,7],
+[2,5,8],
+[0,4,8],
+[2,4,6],
+]
 let turnn = "X";
 const GameBoard = () => {
+    const socket = io("https://tictactoe-stz8.onrender.com");
     const {roomId,userId} = useParams();
     const playerId = roomId+userId;
     console.log(roomId,userId,"consoled")
@@ -41,15 +41,14 @@ const GameBoard = () => {
             if(message){
                 turnn=turn;
                flushSync(() => {
-                setBoard(() => [0,0,0,0,0,0,0,0,0]);
+                setBoard(arr);
                 setCheck(false);
-                turnn = "X";
             }); 
             console.log("came to message")
             }else{
             board[index] = value;
             flushSync(() => {
-                setBoard((prev) => {return [...board]});
+                setBoard(board);
             });
             turnn = turn;
             console.log(board)
